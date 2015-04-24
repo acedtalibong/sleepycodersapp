@@ -15,8 +15,66 @@
 //= require turbolinks
 //= require_tree .
 
+var ready;
+var map;
+ready = function() {
+  var behavior, defaultLayers, moveMapToBerlin, platform, ui;
+  platform = new H.service.Platform({
+    app_id: 'Q88isWuwHeTkAu8e3yjC',
+    app_code: 'mGxi7qxhc1gBQzlBqREOyw',
+    useCIT: true,
+    useHTTPS: true
+  });
+  defaultLayers = platform.createDefaultLayers();
+  map = new H.Map(document.getElementById('map'), defaultLayers.normal.map);
+  behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+  ui = H.ui.UI.createDefault(map, defaultLayers);
+  map.setBaseLayer(defaultLayers.normal.traffic);
+  moveMapToBerlin = function(map) {
+    map.setCenter({
+      lat: 14.67,
+      lng: 121.04
+    });
+    map.setZoom(14);
+  };
+  return moveMapToBerlin(map);
+};
+
+$(document).ready(ready);
+
+$(document).on('page:load', ready);
+
 $(document).ready(function(){
   $("#destination_button").click(function(){
-    text = $("#destination").val();
+    //var map = document.getElementById('map')
+
+    var searchtxt = document.getElementById('destination').value;
+	var xmlHttp;
+	searchtxt = searchtxt.replace(/ /g,"+");;
+	
+	xmlHttp = null;
+
+	xmlHttp = new XMLHttpRequest;
+	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
+
+	xmlHttp.open('GET', toGet, false);
+
+	xmlHttp.send(null);
+
+	var response = xmlHttp.responseText;
+	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
+	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
+	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
+
+	var moveMap;
+	moveMap = function(map) {
+	  map.setCenter({
+	    lat: latitude,
+	    lng: longitude
+	  });
+	  map.setZoom(14);
+	};
+
+	moveMap(map);
   });
 });
