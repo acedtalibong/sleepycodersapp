@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function getDestination(){
+  var destination = document.getElementByID('destination');
+  var destination_text = destination.text();
+}
