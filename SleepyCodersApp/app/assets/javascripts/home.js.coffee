@@ -24,7 +24,7 @@ ready = ->
 
   # Now use the map as required...
 
-  map.setBaseLayer defaultLayers.satellite.traffic
+  map.setBaseLayer defaultLayers.normal.traffic
   moveMapToBerlin = (map) ->
     map.setCenter
       lat: 14.67
