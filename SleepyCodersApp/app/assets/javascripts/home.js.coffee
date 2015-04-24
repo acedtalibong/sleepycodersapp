@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-<<<<<<< HEAD
+
 ready = ->
   #initialize a platform object
   platform = new (H.service.Platform)(
@@ -18,5 +18,4 @@ ready = ->
       lng: 13.4)
 $(document).ready(ready)
 $(document).on('page:load', ready)
-=======
->>>>>>> 5d832f9ee13b32fdd699f3a6a556c97e87edff6f
+
