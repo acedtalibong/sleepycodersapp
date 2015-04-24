@@ -21,7 +21,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body id = "bg">
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -37,11 +37,6 @@
 	    </div>
 	  </div>
 	</nav>
-
-	<div class="wrapper">
-	    <img src="/assets/windmill.jpg" class="img-responsive">
-     </div>
-  
 <%= yield %>
 
 </body>

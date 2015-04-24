@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap/theme";
+@import "bootstrap";
+
+ #bg{
+  background-size: 100% auto;
+  background-image: url('windmill.jpg');
+  background-position: fixed;
+  background-repeat: no-repeat;
+ }
