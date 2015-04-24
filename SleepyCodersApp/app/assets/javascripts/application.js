@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
+<<<<<<< HEAD
 
 $("#search").click(function(){
  	var searchString = document.getElementByID('searchbar');
@@ -67,3 +68,10 @@ $("#search").click(function(){
           geocoder.geocode(geocodingParams, onResult, function(e) {
             alert(e);
           });
+=======
+$(document).ready(function(){
+  $("#destination_button").click(function(){
+    text = $("#destination").val();
+  });
+});
+>>>>>>> 215bb59b10870db0c7d7014371f4fcf3e10de20e

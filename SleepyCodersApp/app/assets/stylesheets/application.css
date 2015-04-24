@@ -18,8 +18,49 @@
 @import "bootstrap/theme";
 @import "bootstrap";
 
- #bg{
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
   background-size: 100% auto;
+<<<<<<< HEAD
+=======
+  background-image: url('windmill4.jpeg');
+>>>>>>> 215bb59b10870db0c7d7014371f4fcf3e10de20e
   background-position: fixed;
   background-repeat: no-repeat;
- }
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color: #f5f5f5;
+  padding-top: 10px;
+  padding-left: 20px;
+  background-color: #080808;
+}
+
+.footer p{
+  font-size: 14px;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}

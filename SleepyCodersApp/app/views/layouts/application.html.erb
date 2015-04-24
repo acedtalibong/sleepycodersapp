@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>SleepyCodersApp</title>
   <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -7,7 +8,7 @@
     href="http://js.api.here.com/v3/3.0/mapsjs-ui.css" />
   <script type="text/javascript" charset="UTF-8"
     src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
-  <script type="text/javascript" charset="UTF-8"
+  <script type="text/javascript" charset="UTF-8"  
     src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
   <script type="text/javascript" charset="UTF-8"
     src="http://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
@@ -22,8 +23,8 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body id = "bg">
-	<nav class="navbar navbar-inverse">
+<body>
+	<nav class="navbar navbar-inverse navbar-static-top">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
 	      <a class="navbar-brand" href="#">Itinerary Manager</a>
@@ -31,23 +32,22 @@
 	    <div>
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="#">Home</a></li>
-	        <li><a href="#">Page 1</a></li>
-	        <li><a href="#">Page 2</a></li>
-	        <li><a href="#">Page 3</a></li>
 	      </ul>
 	    </div>
 	    <div>
 			<form class="navbar-form navbar-right" role="search">
 			  <div class="form-group">
-			    <input id="searchbar" type="text" class="form-control" placeholder="Destination" value = "Search">
+			    <input type="text" class="form-control" placeholder="Destination" id = "destination">
 			  </div>
-			  <button id = "search" type="submit" class="btn btn-default">Submit</button>
+			  <div type = "submit" class="btn btn-default" id = "destination_button">Discover</div>
 			</form>
 	    </dib>
 	  </div>
 	</nav>
 	<%= yield %>
 
+  <footer class = "footer">
+    <p class = "text-muted">Search. Travel. Discover.</p>
+  </footer>
 </body>
-
 </html>
