@@ -14,18 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-$(document).ready(function(){
-  $("#destination_button").click(function(){
-    function getAttraction(){
-      xmlHttp = new XMLHttpRequest();
-      xmlHttp.open("GET", "http://places.cit.api.here.com/places/v1/discover/explore
-          ?app_id=DemoAppId01082013GAL
-          &app_code=AJKnXv84fjrb0KIHawS0Tg
-          &at=52.50449,13.39091
-          &pretty", false);
-      xmlHttp.send();
-      $(document).getElementById("#mapContainer2").innerHTML() = xmlHttp.responseText  
-    }
-  });
-});
