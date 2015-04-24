@@ -4,4 +4,12 @@ class HomeController < ApplicationController
     
   end
 
+  def test
+
+  end
+
+  def index
+
+  end
+
 end
