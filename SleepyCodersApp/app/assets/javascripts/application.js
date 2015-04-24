@@ -15,7 +15,8 @@
 //= require turbolinks
 //= require_tree .
 
-function getDestination(){
-  var destination = document.getElementByID('destination');
-  var destination_text = destination.text();
-}
+$(document).ready(function(){
+  $("#destination_button").click(function(){
+    text = $("#destination").val();
+  });
+});
