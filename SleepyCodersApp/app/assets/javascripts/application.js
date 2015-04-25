@@ -50,39 +50,39 @@ $(document).ready(function(){
 
     //for retrieving the destination
     var searchtxt = document.getElementById('destination').value;
-	  var xmlHttp;
-	  searchtxt = searchtxt.replace(/ /g,"+");;
-	  xmlHttp = null;
-  	xmlHttp = new XMLHttpRequest;
-  	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
+    var xmlHttp;
+    searchtxt = searchtxt.replace(/ /g,"+");;
+    xmlHttp = null;
+    xmlHttp = new XMLHttpRequest;
+    toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
 
-	   xmlHttp.open('GET', toGet, false);
+     xmlHttp.open('GET', toGet, false);
 
-	   xmlHttp.send(null);
+     xmlHttp.send(null);
 
-    	var response = xmlHttp.responseText;
-    	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
-    	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
-    	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
+      var response = xmlHttp.responseText;
+      var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
+      var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
+      var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
 
-    	var moveMap;
-    	moveMap = function(map) {
-    	  map.setCenter({
-    	    lat: latitude,
-    	    lng: longitude
-    	  });
-    	  map.setZoom(14);
-    	};
-    	alert("longitude " + longitude);
-    	alert("latitude " + latitude);
+      var moveMap;
+      moveMap = function(map) {
+        map.setCenter({
+          lat: latitude,
+          lng: longitude
+        });
+        map.setZoom(14);
+      };
+      alert("longitude " + longitude);
+      alert("latitude " + latitude);
 
-    	moveMap(map);
+      moveMap(map);
 
       xmlHttp = null
       xmlHttp = new XMLHttpRequest
       xmlHttp.open('GET', 'http://places.cit.api.here.com/places/v1/discover/search?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&at=' + latitude +',' + longitude +'&q=landmark-attraction&accept=application%2Fjson', false);
       xmlHttp.send(null);
-      obj = JSON.parse(xmlHttp.responseText)
+      obj = JSON.parse(xmlHttp.responseText);
       
       
       var arrayOfVenues = new Array(100, 5);
@@ -120,13 +120,13 @@ $(document).ready(function(){
         var distance = obj.results.items[i].distance;
         arrayOfVenues[i] = [title, lat, longi, averageRating, distance];
         if(arrayOfVenues[i][3] > 4.0){
-        	if(itCtr < 5){
-	        	fives = fives+1;
-	        	itVenues[itCtr] = arrayOfVenues[i];
+          if(itCtr < 5){
+            fives = fives+1;
+            itVenues[itCtr] = arrayOfVenues[i];
             map.addObject(new H.map.Marker({lat:itVenues[itCtr][1], lng:itVenues[itCtr][2]}));
-	        	//alert("adding " + itVenues[itCtr][0] + " with rating " + itVenues[itCtr][3]);
-	        	itCtr++;
-	        }
+            //alert("adding " + itVenues[itCtr][0] + " with rating " + itVenues[itCtr][3]);
+            itCtr++;
+          }
         }
         else if(arrayOfVenues[i][3] > 3.0) fours = fours+1;
         else if(arrayOfVenues[i][3] > 2.0) threes = threes+1;
@@ -137,32 +137,32 @@ $(document).ready(function(){
       //alert(itCtr);
       //alert("five: " + fives + " four: " + fours + " three: " + threes + " two: " + twos + " one: " + ones);
       for(j = 4; j > 0, itCtr < 5; j++){
-	      if(itCtr < 5){
-	      	//alert("fail");
-	      	for(i = 0; i < arrayOfVenues.length, itCtr < 5; i++){
-	      		if(arrayOfVenues[i][3] > j-1 && arrayOfVenues[i][3] <= j){
-	        		itVenues[itCtr] = arrayOfVenues[i];
-	        		itCtr++;
-	        	}
-	      	}
-	      }
-	  }
+        if(itCtr < 5){
+          //alert("fail");
+          for(i = 0; i < arrayOfVenues.length, itCtr < 5; i++){
+            if(arrayOfVenues[i][3] > j-1 && arrayOfVenues[i][3] <= j){
+              itVenues[itCtr] = arrayOfVenues[i];
+              itCtr++;
+            }
+          }
+        }
+    }
       if(itCtr < 5){
-      	for(i = 0; i < arrayOfVenues.length, itCtr < 5; i++){
-      		if(arrayOfVenues[i][3] == 0){
-      			//alert("fail");
-        		itVenues[itCtr] = arrayOfVenues[i];
-        		itCtr++;
-        	}
-      	}
+        for(i = 0; i < arrayOfVenues.length, itCtr < 5; i++){
+          if(arrayOfVenues[i][3] == 0){
+            //alert("fail");
+            itVenues[itCtr] = arrayOfVenues[i];
+            itCtr++;
+          }
+        }
       }
       /*alert(itVenues.length);
       for(i = 0; i < itVenues.length; i++){
-      	alert("title: " + itVenues[i][0] + " rating: " + itVenues[i][3]);
+        alert("title: " + itVenues[i][0] + " rating: " + itVenues[i][3]);
       }
       for(i = 0; i < arrayOfVenues.length; i++){
-      	alert("venues");
-      	alert("title: " + arrayOfVenues[i][0] + " rating: " + arrayOfVenues[i][3]);
+        alert("venues");
+        alert("title: " + arrayOfVenues[i][0] + " rating: " + arrayOfVenues[i][3]);
       }*/
 
     });
