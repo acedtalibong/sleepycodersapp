@@ -73,6 +73,8 @@ $(document).ready(function(){
     	  });
     	  map.setZoom(14);
     	};
+    	alert("longitude " + longitude);
+    	alert("latitude " + latitude);
     	moveMap(map);
 
       xmlHttp = null
@@ -85,9 +87,85 @@ $(document).ready(function(){
       var arrayOfVenues = new Array(100, 5);
       var i;
       var j;
+      var fives = 0;
+      var fours = 0;
+      var threes = 0;
+      var twos = 0;
+      var ones = 0;
+
       var iMax = 100;
       var jMax = 5;
 
+      var itCtr = 0;
+      var itVenues = new Array(5);
+
+      for(i = 0; i < iMax; i++){
+        arrayOfVenues[i] = new Array();
+      }
+      for(i = 0; i < 5; i++){
+        itVenues[i] = new Array();
+      }
+      
+     
+
+      for(i = 0; i < obj.results.items.length; i++){
+        var title = obj.results.items[i].title;
+        var temp = obj.results.items[i].position.toString();
+        //alert(obj.results.items[i].position);
+        var comma = temp.indexOf(",");
+        var lat = temp.substring(0, comma); //not sure
+        var longi = temp.substring(comma+1, temp.length);
+        var averageRating = obj.results.items[i].averageRating;
+        var distance = obj.results.items[i].distance;
+        arrayOfVenues[i] = [title, lat, longi, averageRating, distance];
+        if(arrayOfVenues[i][3] > 4.0){
+        	if(itCtr < 5){
+	        	fives = fives+1;
+	        	itVenues[itCtr] = arrayOfVenues[i];
+            map.addObject(new H.map.Marker({lat:itVenues[itCtr][1], lng:itVenues[itCtr][2]}));
+	        	//alert("adding " + itVenues[itCtr][0] + " with rating " + itVenues[itCtr][3]);
+	        	itCtr++;
+	        }
+        }
+        else if(arrayOfVenues[i][3] > 3.0) fours = fours+1;
+        else if(arrayOfVenues[i][3] > 2.0) threes = threes+1;
+        else if(arrayOfVenues[i][3] > 1.0) twos = twos+1;
+        else if(arrayOfVenues[i][3] > 0) ones = ones+1;
+      }
+      //alert("boom");
+      //alert(itCtr);
+      //alert("five: " + fives + " four: " + fours + " three: " + threes + " two: " + twos + " one: " + ones);
+      for(j = 4; j > 0, itCtr < 5; j++){
+	      if(itCtr < 5){
+	      	//alert("fail");
+	      	for(i = 0; i < arrayOfVenues.length, itCtr < 5; i++){
+	      		if(arrayOfVenues[i][3] > j-1 && arrayOfVenues[i][3] <= j){
+	        		itVenues[itCtr] = arrayOfVenues[i];
+	        		itCtr++;
+	        	}
+	      	}
+	      }
+	  }
+      if(itCtr < 5){
+      	for(i = 0; i < arrayOfVenues.length, itCtr < 5; i++){
+      		if(arrayOfVenues[i][3] == 0){
+      			//alert("fail");
+        		itVenues[itCtr] = arrayOfVenues[i];
+        		itCtr++;
+        	}
+      	}
+      }
+      /*alert(itVenues.length);
+      for(i = 0; i < itVenues.length; i++){
+      	alert("title: " + itVenues[i][0] + " rating: " + itVenues[i][3]);
+      }
+      for(i = 0; i < arrayOfVenues.length; i++){
+      	alert("venues");
+      	alert("title: " + arrayOfVenues[i][0] + " rating: " + arrayOfVenues[i][3]);
+      }*/
+
+    });
+});
       for(i = 0; i < iMax; i++){
         arrayOfVenues[i] = new Array();
       }
