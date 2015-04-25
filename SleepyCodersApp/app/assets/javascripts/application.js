@@ -41,18 +41,18 @@ ready = function() {
 };
 
 $(document).ready(ready);
-$(document).on('page:load', ready);
-$(document).ready(function(){
 
-  //when a place is searched
+$(document).on('page:load', ready);
+
+$(document).ready(function(){
   $("#destination_button").click(function(){
     //var map = document.getElementById('map')
-
-    //for retrieving the destination
     var searchtxt = document.getElementById('destination').value;
-	  var xmlHttp;
-	  searchtxt = searchtxt.replace(/ /g,"+");;
-	  xmlHttp = null;
+	   var xmlHttp;
+	   searchtxt = searchtxt.replace(/ /g,"+");;
+	
+	   xmlHttp = null;
+
   	xmlHttp = new XMLHttpRequest;
   	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
 
@@ -73,8 +73,11 @@ $(document).ready(function(){
     	  });
     	  map.setZoom(14);
     	};
+<<<<<<< HEAD
     	alert("longitude " + longitude);
     	alert("latitude " + latitude);
+=======
+>>>>>>> parent of 488f108... Add markers to map
 
     	moveMap(map);
 
@@ -88,15 +91,19 @@ $(document).ready(function(){
       var arrayOfVenues = new Array(100, 5);
       var i;
       var j;
+<<<<<<< HEAD
       var fives = 0;
       var fours = 0;
       var threes = 0;
       var twos = 0;
       var ones = 0;
+=======
+>>>>>>> parent of 488f108... Add markers to map
 
       var iMax = 100;
       var jMax = 5;
 
+<<<<<<< HEAD
       var itCtr = 0;
       var itVenues = new Array(5);
 
@@ -167,3 +174,24 @@ $(document).ready(function(){
 
     });
 });
+=======
+      for(i = 0; i < iMax; i++){
+        arrayOfVenues[i] = new Array();
+      }
+
+      
+      //for(i = 0; i < obj.results.items.length; i++){
+        arrayOfVenues[i].title = obj.results.items[i].title;
+        var temp = obj.results.items[0].position + '';
+        temp = temp.split(',');
+        alert(temp[0]);
+        //arrayOfVenues[i].latitude = temp[0]; //not sure
+        //arrayOfVenues[i].longitude = temp[1];
+        //arrayOfVenues[i].averageRating = obj.results.items[i].averageRating;
+        //arrayOfVenues[i].distance = obj.results.items[i].distance;
+      //}
+      });
+
+
+    });
+>>>>>>> parent of 488f108... Add markers to map
