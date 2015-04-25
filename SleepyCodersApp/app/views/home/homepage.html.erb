@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SleepyCodersApp</title>
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+  <link rel="stylesheet" type="text/css"
+    href="http://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+  <script type="text/javascript" charset="UTF-8"
+    src="http://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+  <script type="text/javascript" charset="UTF-8"  
+    src="http://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+  <script type="text/javascript" charset="UTF-8"
+    src="http://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+  <script type="text/javascript"  charset="UTF-8"
+    src="http://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Itinerary Manager</a>
+	    </div>
+	    <div>
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="#">Home</a></li>
+	      </ul>
+	    </div>
+	    <div>
+			<form class="navbar-form navbar-right" role="search">
+			  <div class="form-group">
+			    <input type="text" class="form-control" placeholder="Destination" id = "destination">
+			  </div>
+			  <div type = "submit" class="btn btn-default" id = "destination_button">Discover</div>
+			</form>
+	    </div>
+	  </div>
+	</nav>
+	<%= yield %>
+
+  <footer class = "footer">
+    <p class = "text-muted">Search. Travel. Discover.</p>
+  </footer>
+</body>
+</html>
