@@ -189,8 +189,6 @@ $(document).ready(function(){
         alert("title: " + arrayOfVenues[i][0] + " rating: " + arrayOfVenues[i][3]);
       }*/
 
-    });
-});
       for(i = 0; i < iMax; i++){
         arrayOfVenues[i] = new Array();
       }
