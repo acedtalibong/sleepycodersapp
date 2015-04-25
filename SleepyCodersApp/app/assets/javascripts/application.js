@@ -118,8 +118,6 @@ $(document).ready(function(){
         itVenues[i] = new Array();
       }
       
-     
-
       for(i = 0; i < obj.results.items.length; i++){
         var title = obj.results.items[i].title;
         var temp = obj.results.items[i].position.toString();
@@ -145,9 +143,6 @@ $(document).ready(function(){
         else if(arrayOfVenues[i][3] > 1.0) twos = twos+1;
         else if(arrayOfVenues[i][3] > 0) ones = ones+1;
       }
-      $("#destination_item p").ready(function(){
-        //alert($(this).text());
-      });
       //alert("boom");
       //alert("length: " + arrayOfVenues.length);
       //alert(itCtr);
@@ -180,15 +175,15 @@ $(document).ready(function(){
           }
         }
       }
-      alert(itVenues.length);
+      /*alert(itVenues.length);
       for(i = 0; i < itVenues.length; i++){
         alert("title: " + itVenues[i][0] + " rating: " + itVenues[i][3]);
-      }
+      }*//*
       for(i = 0; i < 5; i++){
         if(itVenues[i] == null){
           itVenues[i][0] = [" "];
         }
-      }
+      }*/
       $('#1st').text(itVenues[0][0]);
       $('#2nd').text(itVenues[1][0]);
       $('#3rd').text(itVenues[2][0]);
