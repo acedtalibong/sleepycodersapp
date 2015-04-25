@@ -51,10 +51,21 @@ $(document).ready(function(){
     //for retrieving the destination
     var searchtxt = document.getElementById('destination').value;
     var xmlHttp;
-    searchtxt = searchtxt.replace(/ /g,"+");;
+    var searchtxt2 = searchtxt.replace(/ /g,"+");
     xmlHttp = null;
     xmlHttp = new XMLHttpRequest;
-    toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
+    toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt2;
+
+     xmlHttp.open('GET', toGet, false);
+
+     xmlHttp.send(null);
+
+    var searchtxt3 = document.getElementById('origin').value;
+    var xmlHttp;
+    var searchtxt4 = searchtxt.replace(/ /g,"+");
+    xmlHttp = null;
+    xmlHttp = new XMLHttpRequest;
+    toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt4;
 
      xmlHttp.open('GET', toGet, false);
 
@@ -73,8 +84,8 @@ $(document).ready(function(){
         });
         map.setZoom(14);
       };
-      alert("longitude " + longitude);
-      alert("latitude " + latitude);
+      //alert("longitude " + longitude);
+      //alert("latitude " + latitude);
 
       moveMap(map);
 
@@ -85,7 +96,7 @@ $(document).ready(function(){
       obj = JSON.parse(xmlHttp.responseText)
       
       
-      var arrayOfVenues = new Array(100, 5);
+      var arrayOfVenues = new Array(obj.results.items.length, 5);
       var i;
       var j;
       var fives = 0;
@@ -94,11 +105,11 @@ $(document).ready(function(){
       var twos = 0;
       var ones = 0;
 
-      var iMax = 100;
+      var iMax = obj.results.items.length;
       var jMax = 5;
 
       var itCtr = 0;
-      var itVenues = new Array(5);
+      var itVenues = new Array();
 
       for(i = 0; i < iMax; i++){
         arrayOfVenues[i] = new Array();
@@ -119,6 +130,7 @@ $(document).ready(function(){
         var averageRating = obj.results.items[i].averageRating;
         var distance = obj.results.items[i].distance;
         arrayOfVenues[i] = [title, lat, longi, averageRating, distance];
+        //alert(arrayOfVenues[i][0]);
         if(arrayOfVenues[i][3] > 4.0){
           if(itCtr < 5){
             fives = fives+1;
@@ -134,41 +146,64 @@ $(document).ready(function(){
         else if(arrayOfVenues[i][3] > 0) ones = ones+1;
       }
       $("#destination_item p").ready(function(){
-        alert($(this).text());
+        //alert($(this).text());
       });
       //alert("boom");
+      //alert("length: " + arrayOfVenues.length);
       //alert(itCtr);
       //alert("five: " + fives + " four: " + fours + " three: " + threes + " two: " + twos + " one: " + ones);
-      for(j = 4; j > 0, itCtr < 5; j++){
+      for(j = 4; j > 0; j--){
         if(itCtr < 5){
           //alert("fail");
-          for(i = 0; i < arrayOfVenues.length, itCtr < 5; i++){
-            if(arrayOfVenues[i][3] > j-1 && arrayOfVenues[i][3] <= j){
+          //alert("length: " + arrayOfVenues.length);
+          for(i = 0; i < arrayOfVenues.length; i++){
+            //alert(i);
+            if(itCtr < 5){
+              if(arrayOfVenues[i][3] > j-1 && arrayOfVenues[i][3] <= j){
+                itVenues[itCtr] = arrayOfVenues[i];
+                map.addObject(new H.map.Marker({lat:itVenues[itCtr][1], lng:itVenues[itCtr][2]}));
+                itCtr++;
+              }
+            }
+          }
+        }
+      }
+      if(itCtr < 5){
+        for(i = 0; i < arrayOfVenues.length; i++){
+          if(itCtr < 5){
+            if(arrayOfVenues[i][3] == 0){
+              //alert("fail");
               itVenues[itCtr] = arrayOfVenues[i];
               map.addObject(new H.map.Marker({lat:itVenues[itCtr][1], lng:itVenues[itCtr][2]}));
               itCtr++;
             }
           }
         }
-    }
-      if(itCtr < 5){
-        for(i = 0; i < arrayOfVenues.length, itCtr < 5; i++){
-          if(arrayOfVenues[i][3] == 0){
-            //alert("fail");
-            itVenues[itCtr] = arrayOfVenues[i];
-            map.addObject(new H.map.Marker({lat:itVenues[itCtr][1], lng:itVenues[itCtr][2]}));
-            itCtr++;
-          }
-        }
       }
-      /*alert(itVenues.length);
+      alert(itVenues.length);
       for(i = 0; i < itVenues.length; i++){
         alert("title: " + itVenues[i][0] + " rating: " + itVenues[i][3]);
       }
+      for(i = 0; i < 5; i++){
+        if(itVenues[i] == null){
+          itVenues[i][0] = [" "];
+        }
+      }
+      $('#1st').text(itVenues[0][0]);
+      $('#2nd').text(itVenues[1][0]);
+      $('#3rd').text(itVenues[2][0]);
+      $('#4th').text(itVenues[3][0]);
+      $('#5th').text(itVenues[4][0]);
+      $('#origin_item').append(searchtxt);
+      $('#destination_item').append(searchtxt3);
+      /*
       for(i = 0; i < arrayOfVenues.length; i++){
         alert("venues");
         alert("title: " + arrayOfVenues[i][0] + " rating: " + arrayOfVenues[i][3]);
       }*/
 
     });
+
+
+
 });
