@@ -78,6 +78,24 @@ $(document).ready(function(){
 
       moveMap(map);
 
+    //for retrieving the destination
+    var searchtxt = document.getElementById('origin').value;
+    var xmlHttp;
+    searchtxt = searchtxt.replace(/ /g,"+");;
+    xmlHttp = null;
+    xmlHttp = new XMLHttpRequest;
+    toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
+
+    xmlHttp.open('GET', toGet, false);
+
+    xmlHttp.send(null);
+
+    response = xmlHttp.responseText;
+    longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
+    var origLatitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
+    var origLongitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
+
+    alert(origLatitude + origLongitude);
       xmlHttp = null
       xmlHttp = new XMLHttpRequest
       xmlHttp.open('GET', 'http://places.cit.api.here.com/places/v1/discover/search?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&at=' + latitude +',' + longitude +'&q=landmark-attraction&accept=application%2Fjson', false);
