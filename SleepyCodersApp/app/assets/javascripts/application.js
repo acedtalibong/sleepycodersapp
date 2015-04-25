@@ -133,9 +133,6 @@ $(document).ready(function(){
         else if(arrayOfVenues[i][3] > 1.0) twos = twos+1;
         else if(arrayOfVenues[i][3] > 0) ones = ones+1;
       }
-      $("#destination_item p").ready(function(){
-        alert($(this).text());
-      });
       //alert("boom");
       //alert(itCtr);
       //alert("five: " + fives + " four: " + fours + " three: " + threes + " two: " + twos + " one: " + ones);
