@@ -47,34 +47,52 @@ $(document).on('page:load', ready);
 $(document).ready(function(){
   $("#destination_button").click(function(){
     //var map = document.getElementById('map')
-
     var searchtxt = document.getElementById('destination').value;
-	var xmlHttp;
-	searchtxt = searchtxt.replace(/ /g,"+");;
+	   var xmlHttp;
+	   searchtxt = searchtxt.replace(/ /g,"+");;
 	
-	xmlHttp = null;
+	   xmlHttp = null;
 
-	xmlHttp = new XMLHttpRequest;
-	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
+  	xmlHttp = new XMLHttpRequest;
+  	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
 
-	xmlHttp.open('GET', toGet, false);
+	   xmlHttp.open('GET', toGet, false);
 
-	xmlHttp.send(null);
+	   xmlHttp.send(null);
 
-	var response = xmlHttp.responseText;
-	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
-	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
-	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
+    	var response = xmlHttp.responseText;
+    	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
+    	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
+    	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
 
-	var moveMap;
-	moveMap = function(map) {
-	  map.setCenter({
-	    lat: latitude,
-	    lng: longitude
-	  });
-	  map.setZoom(14);
-	};
+    	var moveMap;
+    	moveMap = function(map) {
+    	  map.setCenter({
+    	    lat: latitude,
+    	    lng: longitude
+    	  });
+    	  map.setZoom(14);
+    	};
 
-	moveMap(map);
-  });
-});
+    	moveMap(map);
+
+      xmlHttp = null
+      xmlHttp = new XMLHttpRequest
+      xmlHttp.open('GET', 'http://places.cit.api.here.com/places/v1/discover/search?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&at=' + latitude +',' + longitude +'&q=landmark-attraction&accept=application%2Fjson', false);
+      xmlHttp.send(null);
+      obj = JSON.parse(xmlHttp.responseText)
+      
+      alert(obj.results.items[0].position);
+      var arrayOfVenues;
+      var i;
+      for(i = 0; i < obj.results.items.length; i++){
+        arrayOfVenues[i][0] = obj.results.items[i].title;
+        var temp = obj.results.items[i].position.split(',');
+        arrayOfVenues[i][1] = temp[0];
+        arrayOfVenues[i][2] = temp[1];
+      }
+
+      });
+
+
+    });
