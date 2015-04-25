@@ -14,10 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(document).ready(ready);
+$(document).on('page:load', ready);
+$(document).ready(function(){
 
-var ready;
-var map;
-ready = function() {
+  var ready;
+  var map; 
   var behavior, defaultLayers, moveMapToBerlin, platform, ui;
   platform = new H.service.Platform({
     app_id: 'Q88isWuwHeTkAu8e3yjC',
@@ -25,11 +27,13 @@ ready = function() {
     useCIT: true,
     useHTTPS: true
   });
+  
   defaultLayers = platform.createDefaultLayers();
   map = new H.Map(document.getElementById('map'), defaultLayers.normal.map);
   behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
   ui = H.ui.UI.createDefault(map, defaultLayers);
   map.setBaseLayer(defaultLayers.normal.traffic);
+  
   moveMapToBerlin = function(map) {
     map.setCenter({
       lat: 14.67,
@@ -37,42 +41,37 @@ ready = function() {
     });
     map.setZoom(14);
   };
+  
   return moveMapToBerlin(map);
-};
 
-$(document).ready(ready);
-
-$(document).on('page:load', ready);
-
-$(document).ready(function(){
   $("#destination_button").click(function(){
     //var map = document.getElementById('map')
     var searchtxt = document.getElementById('destination').value;
-	   var xmlHttp;
-	   searchtxt = searchtxt.replace(/ /g,"+");;
+	  var xmlHttp;
+	  searchtxt = searchtxt.replace(/ /g,"+");;
 	
-	   xmlHttp = null;
+	  xmlHttp = null;
 
   	xmlHttp = new XMLHttpRequest;
   	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
 
-	   xmlHttp.open('GET', toGet, false);
+	  xmlHttp.open('GET', toGet, false);
 
-	   xmlHttp.send(null);
+	  xmlHttp.send(null);
 
-    	var response = xmlHttp.responseText;
-    	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
-    	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
-    	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
+  	var response = xmlHttp.responseText;
+  	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
+  	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
+  	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
 
-    	var moveMap;
-    	moveMap = function(map) {
-    	  map.setCenter({
-    	    lat: latitude,
-    	    lng: longitude
-    	  });
-    	  map.setZoom(14);
-    	};
+  	var moveMap;
+  	moveMap = function(map) {
+  	  map.setCenter({
+  	    lat: latitude,
+  	    lng: longitude
+  	  });
+  	  map.setZoom(14);
+  	};
 
     	moveMap(map);
 
@@ -95,16 +94,16 @@ $(document).ready(function(){
       }
 
       
-      for(i = 0; i < obj.results.items.length; i++){
+      //for(i = 0; i < obj.results.items.length; i++){
         arrayOfVenues[i].title = obj.results.items[i].title;
-        var temp = obj.results.items[i].position;
+        var temp = obj.results.items[0].position + '';
         temp = temp.split(',');
-        arrayOfVenues[i].latitude = temp[0]; //not sure
-        arrayOfVenues[i].longitude = temp[1];
-        arrayOfVenues[i].averageRating = obj.results.items[i].averageRating;
-        arrayOfVenues[i].distance = obj.results.items[i].distance;
-        alert(arrayOfVenues[i].distance);
-      }
+        alert(temp[0]);
+        //arrayOfVenues[i].latitude = temp[0]; //not sure
+        //arrayOfVenues[i].longitude = temp[1];
+        //arrayOfVenues[i].averageRating = obj.results.items[i].averageRating;
+        //arrayOfVenues[i].distance = obj.results.items[i].distance;
+      //}
       });
 
 
