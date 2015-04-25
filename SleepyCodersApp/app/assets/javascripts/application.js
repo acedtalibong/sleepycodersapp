@@ -74,8 +74,11 @@ $(document).ready(function(){
     	  map.setZoom(14);
     	};
 <<<<<<< HEAD
+<<<<<<< HEAD
     	alert("longitude " + longitude);
     	alert("latitude " + latitude);
+=======
+>>>>>>> parent of 488f108... Add markers to map
 =======
 >>>>>>> parent of 488f108... Add markers to map
 
@@ -92,6 +95,7 @@ $(document).ready(function(){
       var i;
       var j;
 <<<<<<< HEAD
+<<<<<<< HEAD
       var fives = 0;
       var fours = 0;
       var threes = 0;
@@ -99,10 +103,13 @@ $(document).ready(function(){
       var ones = 0;
 =======
 >>>>>>> parent of 488f108... Add markers to map
+=======
+>>>>>>> parent of 488f108... Add markers to map
 
       var iMax = 100;
       var jMax = 5;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
       var itCtr = 0;
       var itVenues = new Array(5);
@@ -175,6 +182,8 @@ $(document).ready(function(){
     });
 });
 =======
+=======
+>>>>>>> parent of 488f108... Add markers to map
       for(i = 0; i < iMax; i++){
         arrayOfVenues[i] = new Array();
       }
@@ -194,4 +203,7 @@ $(document).ready(function(){
 
 
     });
+<<<<<<< HEAD
+>>>>>>> parent of 488f108... Add markers to map
+=======
 >>>>>>> parent of 488f108... Add markers to map
