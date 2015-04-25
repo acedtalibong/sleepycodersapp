@@ -41,15 +41,14 @@ ready = function() {
 };
 
 $(document).ready(ready);
-$(document).on('page:load', ready);
-$(document).ready(function(){
 
-  //when a place is searched
+$(document).on('page:load', ready);
+
+$(document).ready(function(){
   $("#destination_button").click(function(){
     //var map = document.getElementById('map')
-
-    //for retrieving the destination
     var searchtxt = document.getElementById('destination').value;
+<<<<<<< HEAD
     var xmlHttp;
     searchtxt = searchtxt.replace(/ /g,"+");;
     xmlHttp = null;
@@ -77,26 +76,63 @@ $(document).ready(function(){
       alert("latitude " + latitude);
 
       moveMap(map);
+=======
+	   var xmlHttp;
+	   searchtxt = searchtxt.replace(/ /g,"+");;
+	
+	   xmlHttp = null;
+
+  	xmlHttp = new XMLHttpRequest;
+  	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
+
+	   xmlHttp.open('GET', toGet, false);
+
+	   xmlHttp.send(null);
+
+    	var response = xmlHttp.responseText;
+    	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
+    	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
+    	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
+
+    	var moveMap;
+    	moveMap = function(map) {
+    	  map.setCenter({
+    	    lat: latitude,
+    	    lng: longitude
+    	  });
+    	  map.setZoom(14);
+    	};
+
+    	moveMap(map);
+>>>>>>> parent of 488f108... Add markers to map
 
       xmlHttp = null
       xmlHttp = new XMLHttpRequest
       xmlHttp.open('GET', 'http://places.cit.api.here.com/places/v1/discover/search?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&at=' + latitude +',' + longitude +'&q=landmark-attraction&accept=application%2Fjson', false);
       xmlHttp.send(null);
+<<<<<<< HEAD
       obj = JSON.parse(xmlHttp.responseText);
+=======
+      obj = JSON.parse(xmlHttp.responseText)
+>>>>>>> parent of 488f108... Add markers to map
       
       
       var arrayOfVenues = new Array(100, 5);
       var i;
       var j;
+<<<<<<< HEAD
       var fives = 0;
       var fours = 0;
       var threes = 0;
       var twos = 0;
       var ones = 0;
+=======
+>>>>>>> parent of 488f108... Add markers to map
 
       var iMax = 100;
       var jMax = 5;
 
+<<<<<<< HEAD
       var itCtr = 0;
       var itVenues = new Array(5);
 
@@ -167,3 +203,24 @@ $(document).ready(function(){
 
     });
 });
+=======
+      for(i = 0; i < iMax; i++){
+        arrayOfVenues[i] = new Array();
+      }
+
+      
+      //for(i = 0; i < obj.results.items.length; i++){
+        arrayOfVenues[i].title = obj.results.items[i].title;
+        var temp = obj.results.items[0].position + '';
+        temp = temp.split(',');
+        alert(temp[0]);
+        //arrayOfVenues[i].latitude = temp[0]; //not sure
+        //arrayOfVenues[i].longitude = temp[1];
+        //arrayOfVenues[i].averageRating = obj.results.items[i].averageRating;
+        //arrayOfVenues[i].distance = obj.results.items[i].distance;
+      //}
+      });
+
+
+    });
+>>>>>>> parent of 488f108... Add markers to map
