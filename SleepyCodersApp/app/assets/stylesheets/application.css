@@ -29,7 +29,7 @@ body {
   background-size: 100% 100%;
   background-image: url('windmill4.jpeg');
   background-position: fixed;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   margin-bottom: 60px;
 }
 .footer {

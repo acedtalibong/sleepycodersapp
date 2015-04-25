@@ -55,3 +55,107 @@
    </div>
   </div>
 </div>
+<style type="text/css">
+		#intro { 
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    padding: 210px 0;
+		}
+		#home { 
+			background: url(assets/windmill4.jpeg) 50% 0 fixed; 
+			height: auto;  
+			margin: 0 auto; 
+		    width: 100%; 
+		    position: relative; 
+		    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+		    padding: 150px 0;
+		}
+		
+		.hero-unit {
+			background-color: #fff;
+		    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+		}
+		.media-object { width: 64px; height: 64px; padding-bottom: 30px }
+	</style>
+
+
+
+<section id="intro" data-speed="6" data-type="background">
+
+	<div class="container">
+
+	    	
+	    		<h2>Itinerary Manager</h2>
+	    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	    		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	    		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	    		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	    		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	    		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	    	
+	    </div>
+
+</section>
+
+
+
+<section id="home" data-speed="4" data-type="background">
+	<div class = "container-fluid">
+	  <div class = "row">
+
+	      <!--MAP COLUMN-->
+	      <div class = "col-lg-6">
+	        <div id="map"></div>
+	      </div>
+
+
+	      <!--ITINERARY COLUMN-->
+	      <div class = "col-lg-6">
+	        <div class="panel panel-default">
+	          <div class = "panel-body">  
+	            <h3 class = "page-header"> Itinerary </h3>
+	        		<div class="list-group">
+
+	        			  <div class="list-group-item list-group-item-info"> 
+	    				  	<b>Origin: <%= params[:destination_button]%></b>
+	    				  	<span class="glyphicon glyphicon-map-marker pull-right" aria-hidden="true"></span>
+	    				  </div>
+
+	    				<br/>
+
+	    				  <a href="#" class="list-group-item"> 
+	    				  	Cras justo odio
+	    				  	<span class="glyphicon glyphicon-globe pull-right" aria-hidden="true"></span>
+	    				  </a>
+	    				  <a href="#" class="list-group-item">
+	    				  	Dapibus ac facilisis in
+	    				  	<span class="glyphicon glyphicon-globe pull-right" aria-hidden="true"></span>
+	    				  </a>
+	    				  <a href="#" class="list-group-item">
+	    				  	Morbi leo risus
+	    				  	<span class="glyphicon glyphicon-globe pull-right" aria-hidden="true"></span>
+	    				  </a>
+	    				  <a href="#" class="list-group-item">
+	    				  	Porta ac consectetur ac
+	    				  	<span class="glyphicon glyphicon-globe pull-right" aria-hidden="true"></span>
+	    				  </a>
+	    				  <a href="#" class="list-group-item">
+	    				  	Vestibulum at eros
+	    				  	 <span class="glyphicon glyphicon-globe pull-right" aria-hidden="true"></span>
+	    				  </a>
+
+	    				  <br/>
+
+	    				  <div class="list-group-item list-group-item-info"> 
+	    				  	<b>Destination</b>
+	    				  	<span class="glyphicon glyphicon-map-marker pull-right" aria-hidden="true"></span>
+	    				  </div>
+				      </div>
+	         	</div>
+	        </div>
+	      </div>
+	   </div>
+	</div>
+</section>
