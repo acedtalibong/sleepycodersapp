@@ -26,8 +26,7 @@ html {
 }
 body {
   /* Margin bottom by footer height */
-  background-size: 100% 100%;
-  background-image: url('windmill4.jpeg');
+  background-size: 100% auto;
   background-position: fixed;
   background-repeat: repeat;
   margin-bottom: 60px;
