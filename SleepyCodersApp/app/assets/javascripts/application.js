@@ -41,71 +41,77 @@ ready = function() {
 };
 
 $(document).ready(ready);
-
 $(document).on('page:load', ready);
-
 $(document).ready(function(){
+
+  //when a place is searched
   $("#destination_button").click(function(){
     //var map = document.getElementById('map')
-    var searchtxt = document.getElementById('destination').value;
-	   var xmlHttp;
-	   searchtxt = searchtxt.replace(/ /g,"+");;
-	
-	   xmlHttp = null;
 
+    //for retrieving the destination
+    var searchtxt = document.getElementById('destination').value;
+	  var xmlHttp;
+	  searchtxt = searchtxt.replace(/ /g,"+");;
+	  xmlHttp = null;
   	xmlHttp = new XMLHttpRequest;
   	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
+	  xmlHttp.open('GET', toGet, false);
+	  xmlHttp.send(null);
 
-	   xmlHttp.open('GET', toGet, false);
+    //for getting the response
+  	var response = xmlHttp.responseText;
+  	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
+  	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
+  	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
 
-	   xmlHttp.send(null);
+    //move map according to the destination
+  	var moveMap;
+  	moveMap = function(map) {
+  	  map.setCenter({
+  	    lat: latitude,
+  	    lng: longitude
+  	  });
+  	  map.setZoom(14);
+  	};
+  	moveMap(map);
 
-    	var response = xmlHttp.responseText;
-    	var longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
-    	var latitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
-    	var longitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
+    //storing markers to a group
+    function addMarkerToGroup(group, coordinate, html) {
+      var marker = new H.map.Marker(coordinate);
+      // add custom data to the marker
+      marker.setData(html);
+      group.addObject(marker);
+    }
 
-    	var moveMap;
-    	moveMap = function(map) {
-    	  map.setCenter({
-    	    lat: latitude,
-    	    lng: longitude
-    	  });
-    	  map.setZoom(14);
-    	};
+    //get the land attractions on the way to the destination
+    xmlHttp = null
+    xmlHttp = new XMLHttpRequest
+    xmlHttp.open('GET', 'http://places.cit.api.here.com/places/v1/discover/search?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&at=' + latitude +',' + longitude +'&q=landmark-attraction&accept=application%2Fjson', false);
+    xmlHttp.send(null);
+    obj = JSON.parse(xmlHttp.responseText)
+    
+    //initializing the array for storing the attractions
+    var arrayOfVenues = new Array(100, 5);
+    var i;
+    var j;
+    var iMax = 100;
+    var jMax = 5;
+    for(i = 0; i < iMax; i++){
+      arrayOfVenues[i] = new Array();
+    }
 
-    	moveMap(map);
+    //storing the attractions to the array
+    for(i = 0; i < obj.results.items.length; i++){
+      var title = obj.results.items[i].title;
+      var temp = obj.results.items[i].position.toString();
+      var comma = temp.indexOf(",");
+      var lati = temp.substring(0, comma); //not sure
+      var longi = temp.substring(comma+1, temp.length);
+      var averageRating = obj.results.items[i].averageRating;
+      var distance = obj.results.items[i].distance;
+      arrayOfVenues[i] = [title, lati, longi, averageRating, distance];
 
-      xmlHttp = null
-      xmlHttp = new XMLHttpRequest
-      xmlHttp.open('GET', 'http://places.cit.api.here.com/places/v1/discover/search?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&at=' + latitude +',' + longitude +'&q=landmark-attraction&accept=application%2Fjson', false);
-      xmlHttp.send(null);
-      obj = JSON.parse(xmlHttp.responseText)
-      
-      
-      var arrayOfVenues = new Array(100, 5);
-      var i;
-      var j;
-
-      var iMax = 100;
-      var jMax = 5;
-
-      for(i = 0; i < iMax; i++){
-        arrayOfVenues[i] = new Array();
-      }
-
-      
-      //for(i = 0; i < obj.results.items.length; i++){
-        arrayOfVenues[i].title = obj.results.items[i].title;
-        var temp = obj.results.items[0].position + '';
-        temp = temp.split(',');
-        alert(temp[0]);
-        //arrayOfVenues[i].latitude = temp[0]; //not sure
-        //arrayOfVenues[i].longitude = temp[1];
-        //arrayOfVenues[i].averageRating = obj.results.items[i].averageRating;
-        //arrayOfVenues[i].distance = obj.results.items[i].distance;
-      //}
-      });
-
-
-    });
+      map.addObject(new H.map.Marker({lat:lati, lng:longi}));
+    }
+  });
+});
