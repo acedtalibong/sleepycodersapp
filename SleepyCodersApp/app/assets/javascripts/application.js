@@ -78,24 +78,6 @@ $(document).ready(function(){
 
       moveMap(map);
 
-    //for retrieving the destination
-    var searchtxt = document.getElementById('origin').value;
-    var xmlHttp;
-    searchtxt = searchtxt.replace(/ /g,"+");;
-    xmlHttp = null;
-    xmlHttp = new XMLHttpRequest;
-    toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
-
-    xmlHttp.open('GET', toGet, false);
-
-    xmlHttp.send(null);
-
-    response = xmlHttp.responseText;
-    longlat = response.match("<DisplayPosition>(.*)</DisplayPosition>");
-    var origLatitude = longlat[1].match("<Latitude>(.*)</Latitude>")[1];
-    var origLongitude = longlat[1].match("<Longitude>(.*)</Longitude>")[1];
-
-    alert(origLatitude + origLongitude);
       xmlHttp = null
       xmlHttp = new XMLHttpRequest
       xmlHttp.open('GET', 'http://places.cit.api.here.com/places/v1/discover/search?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&at=' + latitude +',' + longitude +'&q=landmark-attraction&accept=application%2Fjson', false);
@@ -151,8 +133,8 @@ $(document).ready(function(){
         else if(arrayOfVenues[i][3] > 1.0) twos = twos+1;
         else if(arrayOfVenues[i][3] > 0) ones = ones+1;
       }
-      $("#destination_item").ready(function(){
-        alert($(this).value);
+      $("#destination_item p").ready(function(){
+        alert($(this).text());
       });
       //alert("boom");
       //alert(itCtr);
