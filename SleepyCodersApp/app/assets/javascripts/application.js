@@ -41,18 +41,18 @@ ready = function() {
 };
 
 $(document).ready(ready);
-
 $(document).on('page:load', ready);
-
 $(document).ready(function(){
+
+  //when a place is searched
   $("#destination_button").click(function(){
     //var map = document.getElementById('map')
-    var searchtxt = document.getElementById('destination').value;
-	   var xmlHttp;
-	   searchtxt = searchtxt.replace(/ /g,"+");;
-	
-	   xmlHttp = null;
 
+    //for retrieving the destination
+    var searchtxt = document.getElementById('destination').value;
+	  var xmlHttp;
+	  searchtxt = searchtxt.replace(/ /g,"+");;
+	  xmlHttp = null;
   	xmlHttp = new XMLHttpRequest;
   	toGet = 'http://geocoder.cit.api.here.com/6.2/geocode.xml?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&gen=8&searchtext='+ searchtxt;
 
@@ -123,6 +123,7 @@ $(document).ready(function(){
         	if(itCtr < 5){
 	        	fives = fives+1;
 	        	itVenues[itCtr] = arrayOfVenues[i];
+            map.addObject(new H.map.Marker({lat:itVenues[itCtr][1], lng:itVenues[itCtr][2]}));
 	        	//alert("adding " + itVenues[itCtr][0] + " with rating " + itVenues[itCtr][3]);
 	        	itCtr++;
 	        }
