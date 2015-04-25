@@ -48,7 +48,6 @@ $(document).ready(function(){
   $("#destination_button").click(function(){
     //var map = document.getElementById('map')
     var searchtxt = document.getElementById('destination').value;
-<<<<<<< HEAD
     var xmlHttp;
     searchtxt = searchtxt.replace(/ /g,"+");;
     xmlHttp = null;
@@ -76,7 +75,6 @@ $(document).ready(function(){
       alert("latitude " + latitude);
 
       moveMap(map);
-=======
 	   var xmlHttp;
 	   searchtxt = searchtxt.replace(/ /g,"+");;
 	
@@ -104,35 +102,25 @@ $(document).ready(function(){
     	};
 
     	moveMap(map);
->>>>>>> parent of 488f108... Add markers to map
 
       xmlHttp = null
       xmlHttp = new XMLHttpRequest
       xmlHttp.open('GET', 'http://places.cit.api.here.com/places/v1/discover/search?app_id=Q88isWuwHeTkAu8e3yjC&app_code=mGxi7qxhc1gBQzlBqREOyw&at=' + latitude +',' + longitude +'&q=landmark-attraction&accept=application%2Fjson', false);
       xmlHttp.send(null);
-<<<<<<< HEAD
-      obj = JSON.parse(xmlHttp.responseText);
-=======
       obj = JSON.parse(xmlHttp.responseText)
->>>>>>> parent of 488f108... Add markers to map
       
       
       var arrayOfVenues = new Array(100, 5);
       var i;
       var j;
-<<<<<<< HEAD
       var fives = 0;
       var fours = 0;
       var threes = 0;
       var twos = 0;
       var ones = 0;
-=======
->>>>>>> parent of 488f108... Add markers to map
 
       var iMax = 100;
       var jMax = 5;
-
-<<<<<<< HEAD
       var itCtr = 0;
       var itVenues = new Array(5);
 
@@ -203,7 +191,6 @@ $(document).ready(function(){
 
     });
 });
-=======
       for(i = 0; i < iMax; i++){
         arrayOfVenues[i] = new Array();
       }
@@ -223,4 +210,3 @@ $(document).ready(function(){
 
 
     });
->>>>>>> parent of 488f108... Add markers to map
