@@ -82,16 +82,29 @@ $(document).ready(function(){
       xmlHttp.send(null);
       obj = JSON.parse(xmlHttp.responseText)
       
-      alert(obj.results.items[0].position);
-      var arrayOfVenues;
+      
+      var arrayOfVenues = new Array(100, 5);
       var i;
-      for(i = 0; i < obj.results.items.length; i++){
-        arrayOfVenues[i][0] = obj.results.items[i].title;
-        var temp = obj.results.items[i].position.split(',');
-        arrayOfVenues[i][1] = temp[0];
-        arrayOfVenues[i][2] = temp[1];
+      var j;
+
+      var iMax = 100;
+      var jMax = 5;
+
+      for(i = 0; i < iMax; i++){
+        arrayOfVenues[i] = new Array();
       }
 
+      
+      for(i = 0; i < obj.results.items.length; i++){
+        arrayOfVenues[i].title = obj.results.items[i].title;
+        var temp = obj.results.items[i].position;
+        temp = temp.split(',');
+        arrayOfVenues[i].latitude = temp[0]; //not sure
+        arrayOfVenues[i].longitude = temp[1];
+        arrayOfVenues[i].averageRating = obj.results.items[i].averageRating;
+        arrayOfVenues[i].distance = obj.results.items[i].distance;
+        alert(arrayOfVenues[i].distance);
+      }
       });
 
 
