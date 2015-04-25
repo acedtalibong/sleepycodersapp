@@ -93,17 +93,21 @@ $(document).ready(function(){
       for(i = 0; i < iMax; i++){
         arrayOfVenues[i] = new Array();
       }
-
       
+     
+
       for(i = 0; i < obj.results.items.length; i++){
-        arrayOfVenues[i].title = obj.results.items[i].title;
-        var temp = obj.results.items[i].position;
-        temp = temp.split(',');
-        arrayOfVenues[i].latitude = temp[0]; //not sure
-        arrayOfVenues[i].longitude = temp[1];
-        arrayOfVenues[i].averageRating = obj.results.items[i].averageRating;
-        arrayOfVenues[i].distance = obj.results.items[i].distance;
-        alert(arrayOfVenues[i].distance);
+        var title = obj.results.items[i].title;
+        var temp = obj.results.items[i].position.toString();
+        alert(obj.results.items[i].position);
+        var comma = temp.indexOf(",");
+        var lat = temp.substring(0, comma); //not sure
+        var longi = temp.substring(comma+1, temp.length);
+        var averageRating = obj.results.items[i].averageRating;
+        var distance = obj.results.items[i].distance;
+        arrayOfVenues[i] = [title, lat, longi, averageRating, distance];
+        //alert(arrayOfVenues[i][0]);
+
       }
       });
 
